@@ -1,11 +1,10 @@
-package com.su.ac.th.workshop.response;
+package com.su.ac.th.workshop.model.request;
 
 import lombok.Data;
 
 @Data
-public class PokemonResponse {
+public class PokemonRequest {
 
-    private Long pId;
     private String pName;
     private String pType;
     private Long pHeight;
@@ -13,6 +12,5 @@ public class PokemonResponse {
     private Long pHp;
     private Long pAttack;
     private Long pDefense;
-
 
 }

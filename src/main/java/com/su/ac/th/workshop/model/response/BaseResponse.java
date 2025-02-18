@@ -1,4 +1,4 @@
-package com.su.ac.th.workshop.response;
+package com.su.ac.th.workshop.model.response;
 
 import lombok.Builder;
 import lombok.Data;

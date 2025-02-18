@@ -1,14 +1,12 @@
 package com.su.ac.th.workshop.controller;
 
-import com.su.ac.th.workshop.response.BaseResponse;
-import com.su.ac.th.workshop.response.PokemonResponse;
+import com.su.ac.th.workshop.model.request.PokemonRequest;
+import com.su.ac.th.workshop.model.response.BaseResponse;
+import com.su.ac.th.workshop.model.response.PokemonResponse;
 import com.su.ac.th.workshop.service.PokemonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,6 +32,33 @@ public class PokemonController {
                 .status(200L)
                 .message("Success")
                 .data(pokemonService.getPokemonById(id))
+                .build());
+    }
+
+    @PostMapping("/pokemon")
+    public ResponseEntity<BaseResponse<Void>> createPokemon(@RequestBody PokemonRequest pokemonRequest) {
+        pokemonService.createPokemon(pokemonRequest);
+        return ResponseEntity.ok(BaseResponse.<Void>builder()
+                .status(200L)
+                .message("Success")
+                .build());
+    }
+
+    @PutMapping("/pokemon/{id}")
+    public ResponseEntity<BaseResponse<Void>> updatePokemon(@PathVariable Long id, @RequestBody PokemonRequest pokemonRequest) {
+        pokemonService.updatePokemon(id, pokemonRequest);
+        return ResponseEntity.ok(BaseResponse.<Void>builder()
+                .status(200L)
+                .message("Success")
+                .build());
+    }
+
+    @DeleteMapping("/pokemon/{id}")
+    public ResponseEntity<BaseResponse<Void>> deletePokemon(@PathVariable Long id) {
+        pokemonService.deletePokemon(id);
+        return ResponseEntity.ok(BaseResponse.<Void>builder()
+                .status(200L)
+                .message("Success")
                 .build());
     }
 
