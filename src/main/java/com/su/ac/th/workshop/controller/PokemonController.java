@@ -6,6 +6,7 @@ import com.su.ac.th.workshop.service.PokemonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,18 @@ public class PokemonController {
                 .data(pokemonService.getAllPokemon())
                 .build());
     }
+
+    @GetMapping("/pokemon/{id}")
+    public ResponseEntity<BaseResponse<PokemonResponse>> getPokemonById(@PathVariable Long id) {
+        return ResponseEntity.ok(BaseResponse.<PokemonResponse>builder()
+                .status(200L)
+                .message("Success")
+                .data(pokemonService.getPokemonById(id))
+                .build());
+    }
+
+
+
 
 
 }

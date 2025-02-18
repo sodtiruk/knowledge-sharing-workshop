@@ -35,4 +35,24 @@ public class PokemonService {
 
         return pokemonResponses;
     }
+
+    public PokemonResponse getPokemonById(Long id) {
+        PokemonEntity entity = pokemonRepository.findById(id).orElse(null);
+
+        if (entity == null) {
+            return null;
+        }
+
+        PokemonResponse response = new PokemonResponse();
+        response.setPId(entity.getPId());
+        response.setPName(entity.getPName());
+        response.setPType(entity.getPType());
+        response.setPHeight(entity.getPHeight());
+        response.setPWeight(entity.getPWeight());
+        response.setPHp(entity.getPHp());
+        response.setPAttack(entity.getPAttack());
+        response.setPDefense(entity.getPDefense());
+
+        return response;
+    }
 }
