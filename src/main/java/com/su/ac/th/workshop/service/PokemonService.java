@@ -39,13 +39,31 @@ public class PokemonService {
     }
 
     public void updatePokemon(Long id, PokemonRequest pokemonRequest) {
-        PokemonEntity entity = pokemonRepository.findById(id).orElse(null);
+        PokemonEntity pokemonEntity = pokemonRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pokemon not found"));
 
-        if (entity == null) {
-            throw new RuntimeException("Pokemon not found");
+        if (pokemonRequest.getPName() != null) {
+            pokemonEntity.setPName(pokemonRequest.getPName());
+        }
+        if (pokemonRequest.getPType() != null) {
+            pokemonEntity.setPType(pokemonRequest.getPType());
+        }
+        if (pokemonRequest.getPHeight() != null) {
+            pokemonEntity.setPHeight(pokemonRequest.getPHeight());
+        }
+        if (pokemonRequest.getPWeight() != null) {
+            pokemonEntity.setPWeight(pokemonRequest.getPWeight());
+        }
+        if (pokemonRequest.getPHp() != null) {
+            pokemonEntity.setPHp(pokemonRequest.getPHp());
+        }
+        if (pokemonRequest.getPAttack() != null) {
+            pokemonEntity.setPAttack(pokemonRequest.getPAttack());
+        }
+        if (pokemonRequest.getPDefense() != null) {
+            pokemonEntity.setPDefense(pokemonRequest.getPDefense());
         }
 
-        PokemonEntity pokemonEntity = pokemonComponent.transformPokemonRequestToPokemonEntity(pokemonRequest);
         pokemonRepository.save(pokemonEntity);
     }
 
